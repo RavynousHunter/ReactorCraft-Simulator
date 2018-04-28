@@ -1,0 +1,9 @@
+# ReactorCraft-Simulator
+
+A Flask-based simulator API for ReactorCraft.
+
+# Requires
+* Python 3.6.5
+* Flask
+* Flask-API
+* NumPy
