@@ -21,6 +21,10 @@ MsgStyles = [ 'VERBOSE',
               'MINIMAL' ]
 
 def GetNow():
+	'''
+	Returns the current timestamp in the following format:
+	09-March-2018 14:12:11:070
+	'''
     fmt = '%d-%b-%Y %H:%M:%S:%f'
     return datetime.datetime.now().strftime( fmt )
 
