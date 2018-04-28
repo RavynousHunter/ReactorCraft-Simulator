@@ -1,0 +1,58 @@
+Notes on ReC Thorium Reactor
+============================
+
+* Take lithium (skimmed from hell), mix w/ emerald dust and
+   fluorite in uranium processor, get LiFBe.
+
+* Take LiFBe, mix w/ fluorite and thorium dust in fuel
+   enhancer (RoC), get thorium fuel.
+   
+ + NOTE: COVER ANY THORIUM FUEL RESERVOIRS!
+         IF THINGS FALL INTO IT, RESERVOIRS
+         WILL BLOW THE FUCK UP.
+
+* Thorium fuel cores use fuel lines, not regular fluid
+   pipes (steel/bedrock).
+
+* EIO max fluid conduits can handle multiple fluid types
+   at once, for liquid waste and hot LiFBe Fuel transport.
+   
+======================
+HOW DOES THORIUM WORK?
+======================
+
+* Takes LiFBe Fuel salts from the top, outputs fluid
+   waste and hot LiFBe Fuel from the bottom.
+
+* Can dump heat into lithium-filled water cells; methinks
+   this is for cooling purposes and NOT for generating
+   useable hot fluids.
+
+* When a neutron hits a thorium core:
+
+ + If neutron is breeder, nothing happens.
+
+ + If neutron is a thermal neutron, interaction chance
+    is 100%; if it is fast or otherwise, interaction
+    chance is 60%.
+
+ + There is also a Cos-interpolated chance of interaction,
+    bounded at 400 and 1,200C, inclusive, based on the
+    current temperature.
+
+ + If all this checks out:
+
+  - If the fuel core doesn't have fuel, do nothing. (Duh)
+
+  - If it does have fuel, chances of a neutron are:
+     25 - 20 * sqrt((temp - minTemp) / (maxTemp - minTemp))
+
+  - If THAT checks out, the core loses 100mB of LiFBe
+     salts, adds 100mB of hot LiFBe, adds +20C, and
+     spawns a neutron burst.
+
+  - There is a 5% chance that 50mB of waste is created
+     during this process.
+
+* The thorium fuel core requires minimum 400C to operate.
+
