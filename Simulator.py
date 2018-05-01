@@ -1,5 +1,4 @@
-import json, FuelCores, Blocks
-import datetime
+import json, FuelCores, Blocks, datetime, threading, collections
 
 BlockMap = {
              'U': FuelCores.FissionCore,
@@ -161,10 +160,12 @@ class ReactorSim( JSONSerializable ):
             self.sim_ticks     = SecsToTicks( 300 )
             self.msg_style     = 'VERBOSE'
             
-        self.steam_total      = 0
-        self.melted_down      = False
+        self.steam_total      =  0
+        self.melted_down      =  False
         self.meltdown_tick    = -1
-        self.times_overheated = 0
+        self.times_overheated =  0
+        self.neutron_queue    = deque()
+        self.neutron_thread   = Thread()
 
     def RunSimulation( self ):
         '''
