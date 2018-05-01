@@ -160,6 +160,11 @@ class ReactorSim( JSONSerializable ):
             self.neutronspeeds = False
             self.sim_ticks     = SecsToTicks( 300 )
             self.msg_style     = 'VERBOSE'
+            
+        self.steam_total      = 0
+        self.melted_down      = False
+        self.meltdown_tick    = -1
+        self.times_overheated = 0
 
     def RunSimulation( self ):
         '''
@@ -179,8 +184,16 @@ class ReactorSim( JSONSerializable ):
             #    do temperature whatnot.
             # - If block is thorium core, check for temperature and
             #    such, if it does a neutron, good.
-            # HOW THE FUCK DO I DO NEUTRONS?
+            # HOW DO I DO NEUTRONS?
         
+        sim_data.append( SimEntry( tick = self.sim_ticks,
+                         msg = 'Total Steam Volume = %d' % ( self.steam_total ) ) )
+        sim_data.append( SimEntry( tick = self.sim_ticks,
+                         msg = 'Melted down? ' + str( self.melted_down ) ) )
+        sim_data.append( SimEntry( tick = self.sim_ticks,
+                         msg = 'Meltdown tick = %d' % ( self.meltdown_tick ) ) )
+        sim_data.append( SimEntry( tick = self.sim_ticks,
+                         msg = 'Overheated %d times.' % ( self.times_overheated ) ) )
         return sim_data
     
     def DoNeutronTravel( self, origin, neutron ):
