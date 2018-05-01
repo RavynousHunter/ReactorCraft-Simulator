@@ -35,10 +35,12 @@ class Neutron:
     def __init__( self,
                   Speed     = 'THERMAL',
                   Type      = 'FISSION',
-                  Direction = 'N'):
+                  Direction = 'N',
+                  Location  = ( 0, 0 ) ):
         self.Speed     = Speed.upper()
         self.Type      = Type.upper()
         self.Direction = Direction.upper()
+        self.Location  = Location
 
     @property
     def Speed( self ):
@@ -63,6 +65,19 @@ class Neutron:
     @Direction.setter
     def Direction( self, d ):
         self._Direction = d.upper() if d.upper() in Directions else 'N'
+        
+    @property
+    def Location( self ):
+      return self._Location
+    
+    @Location.setter
+    def Location( self, loc ):
+      if ( loc[0] < 0 ):
+        self._Location[0] = 0
+      elif ( loc[1] < 0 ):
+        self._Location[1] = 0
+      else:
+        self._Location = loc
 
     def GetBoilerAbsorptionChance( self ):
         '''
