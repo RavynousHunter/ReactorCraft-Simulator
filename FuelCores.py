@@ -21,8 +21,8 @@ FissionFuels = { 'URANIUM':   { 'fissionChance': 25,
                                 'wasteChance':   10,
                                 'tempStep':      30 } }
 
-Directions = [ 'N', 'S',
-               'E', 'W' ]
+Directions = ['N', 'S',
+              'E', 'W' ]
     
 
 class Neutron:
