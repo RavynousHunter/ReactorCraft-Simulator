@@ -16,6 +16,7 @@ ShieldTypes = { 'STEEL':      { 'reflect': 95,
                 'BLASTGLASS': { 'reflect': 20,
                                 'absorb':  80   } }
 
+# TODO: Make boiler take internal fluid into account for temperature configuration.
 class Boiler():
     '''
     Represents a boiler (either water or ammonia) within
