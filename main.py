@@ -63,12 +63,12 @@ def Simulation():
                      'data':  data,
                      'R':     R.to_json() }
         else:
-            Sim = ReactorSim( R )
+            Sim  = ReactorSim( R )
+            data = Sim.RunSimulation()
             return { 'Message': 'Ya did good!',
                      'data':     data,
                      'R':        R.__dict__,
-                     'sim_data': \
-                     [x.__dict__ for x in Sim.RunSimulation()] }
+                     'sim_data': data }
 
 if __name__ == '__main__':
     app.run( debug = True )
