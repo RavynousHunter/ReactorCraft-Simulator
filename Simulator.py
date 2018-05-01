@@ -15,10 +15,10 @@ BlockMap = {
              'G': Blocks.BlastGlassBlock
            }
 
-MsgStyles = [ 'ABSURD',
-              'VERBOSE',
-              'NORMAL',
-              'MINIMAL' ]
+MsgStyles = ['ABSURD',
+             'VERBOSE',
+             'NORMAL',
+             'MINIMAL']
 
 def GetNow():
     '''
@@ -103,7 +103,7 @@ class Reactor( JSONSerializable ):
         self.neutronspeeds = bool( neutronspeeds )
         self.sim_ticks     = SecsToTicks( float( sim_secs ) )
         self.message_style = message_style if message_style in MsgStyles \
-                             else 'VERBOSE'
+                             else 'NORMAL'
 
 class SimEntry( JSONSerializable ):
     '''
@@ -176,7 +176,7 @@ class ReactorSim( JSONSerializable ):
         sim_data = [SimEntry( tick = -1,
                               msg  = 'Entering main simulation loop.' )]
         for i in range( self.sim_ticks ):
-            if ( self.msg_style == 'VERBOSE' ):
+            if ( self.msg_style == 'ABSURD' ):
                 sim_data.append( SimEntry( tick = i,
                                  msg = 'At tick ' + str( i ) + '.' ) )
             
