@@ -15,7 +15,8 @@ BlockMap = {
              'G': Blocks.BlastGlassBlock
            }
 
-MsgStyles = [ 'VERBOSE',
+MsgStyles = [ 'ABSURD',
+              'VERBOSE',
               'NORMAL',
               'MINIMAL' ]
 
@@ -213,26 +214,59 @@ class ReactorSim( JSONSerializable ):
             raise 'Neutron was out of bounds!  X=%d, Y=%d' % \
                    origin
         else:
+            neutron.Location = origin
             if ( neutron.Direction == 'N' ):
                 if ( origin[1] == 0 ):
-                    return 'Neutron exited the reactor structure.'
+                    return { 'msg':     'Neutron exited the reactor structure.',
+                             'neutrons': None,
+                             'loc':      origin }
                 else:
-                    pass
+                    neutrons = []
+                    neutron.Location[1] -= 1 # Decrease by 1 on the y-axis
+                    
+                    return { 'msg':     'Neutron traveled to %d, %d' % neutron.Location,
+                             'neutrons': neutrons,
+                             'loc':      neutron.Location }
+                  
             elif ( neutron.Direction == 'S' ):
                 if ( origin[1] == self.height - 1 ):
-                    return 'Neutron exited the reactor structure.'
+                    return { 'msg':     'Neutron exited the reactor structure.',
+                             'neutrons': None,
+                             'loc':      origin }
                 else:
-                    pass
+                    neutrons = []
+                    neutron.Location[1] += 1 # Increase by 1 on the y-axis
+                    
+                    return { 'msg':     'Neutron traveled to %d, %d' % neutron.Location,
+                             'neutrons': neutrons,
+                             'loc':      neutron.Location }
+                    
             elif ( neutron.Direction == 'E' ):
                 if ( origin[0] == self.width - 1 ):
-                    return 'Neutron exited the reactor structure.'
+                    return { 'msg':     'Neutron exited the reactor structure.',
+                             'neutrons': None,
+                             'loc':      origin }
                 else:
-                    pass
+                    neutrons = []
+                    neutron.Location[0] += 1 # Increase by 1 on the x-axis
+                    
+                    return { 'msg':     'Neutron traveled to %d, %d' % neutron.Location,
+                             'neutrons': neutrons,
+                             'loc':      neutron.Location }
+                    
             elif ( neutron.Direction == 'W' ):
                 if ( origin[0] == 0 ):
-                    return 'Neutron exited the reactor structure.'
+                    return { 'msg':     'Neutron exited the reactor structure.',
+                             'neutrons': None,
+                             'loc':      origin }
                 else:
-                    pass
+                    neutrons = []
+                    neutron.Location[0] -= 1 # Decrease by 1 on the x-axis
+                    
+                    return { 'msg':     'Neutron traveled to %d, %d' % neutron.Location,
+                             'neutrons': neutrons,
+                             'loc':      neutron.Location }
+                    
             else:
                 raise 'Neutron has an invalid direction: %s' % \
                        neutron.Direction
